@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { BrowserRouter as Router } from "react-router-dom";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import { Provider } from "react-redux";
+import store from "./Store/index";
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
+  <Router basename={process.env.PUBLIC_URL}>
     <App />
-  </React.StrictMode>,
+  </Router>
+</Provider>,
   document.getElementById('root')
 );
 
