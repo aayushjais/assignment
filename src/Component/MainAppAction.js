@@ -1,12 +1,12 @@
 import * as types from "./MainAppActionTypes";
 import axios from "axios";
 
-export const getEmployeeList = () => (dispatch) => {
+export const getProductList = () => (dispatch) => {
   dispatch({
     type: types.GET_EMPLOYEE_REQUEST,
   });
   axios
-    .get(`https://api.instantwebtools.net/v1/airlines`, [])
+    .get(`https://fakestoreapi.com/products`, [])
     .then((res) => {
       console.log(res);
       dispatch({
