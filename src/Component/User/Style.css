@@ -1,0 +1,15 @@
+.Userlist {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  ul {
+    list-style-type: none;
+  }
+  li {
+    cursor: pointer;
+    margin: 10px 0;
+  }
+  button {
+    cursor: pointer;
+  }
+  

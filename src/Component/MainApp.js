@@ -2,76 +2,55 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getProductList } from "./MainAppAction"
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+import UserCards from "./User/UserCards";
+import AddIcon from '@mui/icons-material/Add';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea } from '@mui/material';
-import { Grid } from '@material-ui/core/'
-import { makeStyles } from '@material-ui/core/styles'
+import UserForm from "./User/UserForm/UserForm";
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 600,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 function MainApp(props) {
-  useEffect(() => {
-    props.getProductList();
-  }, []);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   
-  const useStyles = makeStyles(theme => ({
-    root: {
-      flexGrow: 1,
-      padding: theme.spacing(2)
-    }
-  }))
-  const classes = useStyles()
   return (
     <>
-      <div className={classes.root}>
-        <Grid
-          container
-          spacing={2}
-          direction="row"
-          justify="flex-start"
-          alignItems="flex-start"
-        >
-          {props.employeeList.map((item) => (
-            <Grid item xs={12} sm={6} md={3} key={props.employeeList.indexOf(item)}>
-            <Card class="h-100">
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="300"
-                  image={item.image}
-                // alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    {item.title}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    <b>Price- {item.price}</b>
-                  </Typography>
-                  <Typography variant="body3" color="text.secondary">
-                    <b>{item.description}</b>
-                  </Typography>
-                </CardContent>
-                <Button style={{marginLeft :"30%"}}>Add to Cart</Button>
-              </CardActionArea>
-            </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </div>
+      
+      <h1 style={{textAlign:"center"}}>UserList</h1>
+      <h3 style={{textAlign:"right"}}>Click on Plus to Add User
+      <AddIcon style={{cursor:"pointer"}}onClick={handleOpen}>Open modal</AddIcon></h3>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+         <UserForm/>
+        </Box>
+      </Modal>
+      <UserCards/>
     </>
   );
 }
-const mapStateToProps = ({ main }) => ({
-  employeeList: main.employeeList,
+const mapStateToProps = ({ }) => ({
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
-      getProductList,
     },
     dispatch
   );
