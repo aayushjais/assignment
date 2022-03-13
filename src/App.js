@@ -1,19 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-import MainApp from './Component/MainApp';
-import Update from './Component/Update';
-import { Switch, Route } from "react-router-dom";
-import UserCards from './Component/User/UserCards';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import ProductListing from "./containers/ProductListing";
+import Header from "./containers/Header";
+import "./App.css";
+import ProductDetails from "./containers/ProductDetails";
 
 function App() {
   return (
-    <>
-      {/* <Route path="/" component={MainApp} /> */}
-
-      <MainApp/>
-      <Route exact path="/update" component={Update} />
-
-    </>
+    <div className="App">
+      <Router>
+        <Header />
+        <Switch>
+          <Route path="/" exact component={ProductListing} />
+          <Route path="/product/:productId" component={ProductDetails} />
+          <Route>404 Not Found!</Route>
+        </Switch>
+      </Router>
+    </div>
   );
 }
 
